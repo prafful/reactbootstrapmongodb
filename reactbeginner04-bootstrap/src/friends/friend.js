@@ -1,220 +1,64 @@
 import React from 'react';
+import FriendCard from './friendcard';
+import axios from 'axios';
 
-class FreindComponent extends React.Component {
-    state = {  }
+class FriendComponent extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            friendState: []
+        }
+
+
+    }
+
+    componentWillMount(){
+        this.getRemoteData()
+    }
+
+    getRemoteData(){
+        axios.get("http://localhost:1234/all").then((response)=>{
+            console.log(response.data)
+            console.log("Before")
+            console.log(this.state.friendState)
+            this.setState({
+                friendState: response.data
+            })
+            console.log("After")
+            console.log(this.state.friendState)
+        })
+    }
+
+    displayFriendCard(){
+
+        return this.state.friendState.map((onefriend)=>{
+            return (
+                <FriendCard
+                    key={onefriend._id}
+                    title={onefriend.title}
+                    desc={onefriend.description}
+                    link={onefriend.link}
+                    picture={onefriend.image}
+                >
+                </FriendCard>
+            )
+        })
+        
+
+
+    }
+
     render() { 
         return ( 
             <div>
-
+               
                 <div class="row">
-                    <div class="col-md-3" style={{backgroundColor:'red'}}>
-                        <div class="row">
-                            <div class="col-md-2" style={{backgroundColor:'brown'}}>
-                                2
-                            </div>
-                            <div class="col-md-4" style={{backgroundColor:'grey'}}>
-                                4
-                            </div>
-                            <div class="col-md-5" style={{backgroundColor:'black'}}>
-                                5
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3" style={{backgroundColor:'green'}}>
-                     3
-                    </div>
-                    <div class="col-md-3" style={{backgroundColor:'red'}}>
-                     3
-                    </div>
-                    <div class="col-md-3" style={{backgroundColor:'green'}}>
-                     3
-                    </div>
-                    <div class="col-md-3" style={{backgroundColor:'pink'}}>
-                     3
-                    </div>
-                    <div class="col-md-3" style={{backgroundColor:'purple'}}>
-                     3
-                    </div>
-
+                    {this.displayFriendCard()}
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-                 
-                
-                </div>
-
-
-
-
-
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-                 
-                
-                </div>
-
-
-
-
-
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="card" style={{width: '18rem'}}>
-                            <img src="images/modi.jfif" class="card-img-top" alt="..."></img>
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                    </div>
-                 
-                
-                </div>
-
-              
-                
             </div>
          );
     }
 }
  
-export default FreindComponent;
+export default FriendComponent;
